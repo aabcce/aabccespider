@@ -1,9 +1,9 @@
  = Compose = 
-1.	Core
+Core
 MultiClient
 Support Python PyUnit
 .net Nunit
-2.	UI
+UI
 
 Script 3 layers
 Unit test case 
@@ -16,4 +16,4 @@ Event can be blocked or not . Client spider will accept new commands and strore 
 If a event is hooked, a event id is set to this action and should remove it manly.
 
 
-## Every code should be translated to Java and direct run in Client.
+Every code should be translated to Java and direct run in Client.
