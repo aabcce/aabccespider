@@ -31,6 +31,9 @@ public class OSManagerImpl implements IOSManager {
 	public OSInfo getOSInfo() {
 		OSInfo info = new OSInfo();
 		
+		info.Name = System.getProperty("os.name");
+		info.isWin32 = true;
+		
 		int screencount = OS.GetSystemMetrics (OS.SM_CMONITORS);
 		Screen[] screens = new Screen[screencount];
 		for(int i=0;i<screencount;i++)
