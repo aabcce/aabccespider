@@ -7,12 +7,12 @@ import org.eclipse.swt.internal.win32.*;
 
 public class RobotImpl implements IRobot {
 
-	public native String getHelloworld(String name);
-	
 	public int[] getPointer()
 	{
-		return new int[0];
+		java.awt.Point p = nativespider.java.Robot.getMousePoint();
+		return new int[]{p.x,p.y};
 	}
+	
 	public boolean mouseMove(int posX, int posY) {
 		MOUSEINPUT inputs = new MOUSEINPUT ();
 		
@@ -82,7 +82,7 @@ public class RobotImpl implements IRobot {
 		return result;
 	}
 
-	public boolean mouseWheel(int type,int wheelAmt) {
+	public boolean mouseWheel(int wheelAmt,int type) {
 		MOUSEINPUT inputs = new MOUSEINPUT ();
 
 		if (OS.WIN32_VERSION < OS.VERSION (5, 0)) return false;
