@@ -28,6 +28,16 @@ public class NativeFactory {
 	}
 	
 	public IOSManager getOSManager() {
+		if (_osManager == null) {
+			if (PlatformUtil.isWindows()) {
+
+				_osManager = new nativespider.win32.OSManagerImpl();
+			} else if (PlatformUtil.isMac()) {
+				_osManager = null;
+			} else if (PlatformUtil.isLinux()) {
+				_osManager = null;
+			}
+		}
 		return this._osManager;
 	}
 
@@ -37,9 +47,9 @@ public class NativeFactory {
 
 				_robot = new nativespider.win32.RobotImpl();
 			} else if (PlatformUtil.isMac()) {
-				_robot = new nativespider.macos.RobotImpl();
+				_robot = null;
 			} else if (PlatformUtil.isLinux()) {
-				_robot = new nativespider.linux.RobotImpl();
+				_robot = null;
 			}
 		}
 

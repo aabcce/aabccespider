@@ -7,10 +7,9 @@ import org.eclipse.swt.internal.win32.*;
 
 public class RobotImpl implements IRobot {
 
-	public int[] getPointer()
+	public int[] getMousePostion()
 	{
-		java.awt.Point p = nativespider.java.Robot.getMousePoint();
-		return new int[]{p.x,p.y};
+		return nativespider.java.Robot.getMousePostion();
 	}
 	
 	public boolean mouseMove(int posX, int posY) {
