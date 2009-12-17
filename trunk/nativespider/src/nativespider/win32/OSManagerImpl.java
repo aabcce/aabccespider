@@ -1,5 +1,7 @@
 package nativespider.win32;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.internal.win32.OS;
 
 import nativespider.OSInfo;
@@ -8,14 +10,24 @@ import nativespider.interfaces.IOSManager;
 
 public class OSManagerImpl implements IOSManager {
 
-	public byte[] captureFullScreen() {
-		// TODO Auto-generated method stub
-		return null;
+	public Image captureFullScreen() {
+		Screen screen = getOSInfo().Screens[0];
+		
+		return captureScreen(0,0,screen.width,screen.height);
 	}
-
-	public byte[] captureScreen(int x, int y, int width, int height) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public Image captureScreen(int x, int y, int width, int height) {
+		int hDC = OS.GetDC(0);
+		
+		int memHdc = OS.CreateCompatibleDC(hDC);
+		int hBitmap = OS.SelectObject(memHdc, hDC);
+		OS.BitBlt(memHdc, x, y, width, height, hDC, 0, 0, OS.SRCCOPY);
+		OS.SelectObject(memHdc, hBitmap);
+		OS.DeleteDC(memHdc);
+		
+		Image img = Image.win32_new(null, SWT.BITMAP, hBitmap);
+		
+		return img;
 	}
 
 	public void executeCommand(String command) {
@@ -26,6 +38,11 @@ public class OSManagerImpl implements IOSManager {
 	public String getClipboard() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public void setClipboard(String text) {
+		// TODO Auto-generated method stub
+
 	}
 
 	public OSInfo getOSInfo() {
@@ -45,23 +62,18 @@ public class OSManagerImpl implements IOSManager {
 			screen.height = OS.GetSystemMetrics (OS.SM_CYVIRTUALSCREEN);
 			screens[i] = screen;
 		}
+		info.Screens = screens;
 		
 		return info;
 	}
 
 	public String getOSName() {
-		// TODO Auto-generated method stub
-		return null;
+		return System.getProperty("os.name");
 	}
 
 	public String readCommand(String command) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	public void setClipboard(String text) {
-		// TODO Auto-generated method stub
-
 	}
 
 }

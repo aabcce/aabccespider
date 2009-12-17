@@ -18,16 +18,16 @@ public class RobotTest {
 
 	@Test
 	public void testGetPointer() {
-		int[] p = _robot.getPointer();
+		int[] p = _robot.getMousePostion();
 		
 		Assert.assertTrue(p.length == 2 && p[0] > 0 && p[1] > 0);
 	}
 
 	@Test
 	public void testMouseMove() {
-		int[] p1 = _robot.getPointer();
+		int[] p1 = _robot.getMousePostion();
 		_robot.mouseMove(p1[0] + 1, p1[1] + 1);
-		int[] p2 = _robot.getPointer();
+		int[] p2 = _robot.getMousePostion();
 		
 		Assert.assertTrue(p1[0]+1 == p2[0] && p1[1]+1 == p2[1]);
 	}

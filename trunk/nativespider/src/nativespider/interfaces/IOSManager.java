@@ -1,5 +1,7 @@
 package nativespider.interfaces;
 
+import org.eclipse.swt.graphics.Image;
+
 import nativespider.*;
 
 public interface IOSManager {
@@ -11,9 +13,9 @@ public interface IOSManager {
 	
 	OSInfo getOSInfo();
 	
-	byte[] captureFullScreen();
+	Image captureFullScreen();
 	
-	byte[] captureScreen(int x,int y,int width,int height);
+	Image captureScreen(int x,int y,int width,int height);
 	
 	void setClipboard(String text);
 	

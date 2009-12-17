@@ -11,5 +11,5 @@ public class OSInfo {
 	public boolean isMac;
 	public boolean isLinux;
 	
-	public Screen[] Screen;
+	public Screen[] Screens;
 }

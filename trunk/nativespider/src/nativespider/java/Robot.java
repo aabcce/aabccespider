@@ -1,16 +1,13 @@
 package nativespider.java;
 
-import java.awt.MouseInfo;
-import java.awt.Point;
-import java.awt.PointerInfo;
+import org.eclipse.swt.internal.win32.OS;
+import org.eclipse.swt.internal.win32.POINT;
 
 public class Robot {
-	public static Point getMousePoint() {
-		PointerInfo p = null;
-		p = MouseInfo.getPointerInfo();
-		if (p == null)
-			return null;
-
-		return p.getLocation();
+	public static int[] getMousePostion() {
+		POINT pt = new POINT ();
+		OS.GetCursorPos (pt);
+		
+		return new int[] {pt.x,pt.y};
 	}
 }

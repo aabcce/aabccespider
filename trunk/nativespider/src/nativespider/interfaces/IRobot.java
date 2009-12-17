@@ -5,7 +5,7 @@ public interface IRobot {
 	 * Get current pointer position
 	 * @return
 	 */
-	int[] getPointer();
+	int[] getMousePostion();
 	
 	boolean keyPress(int keycode);
 	
