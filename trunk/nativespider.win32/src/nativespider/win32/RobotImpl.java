@@ -1,7 +1,6 @@
 package nativespider.win32;
 
 import nativespider.interfaces.IRobot;
-import nativespider.java.POINT;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.internal.win32.*;
