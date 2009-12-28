@@ -1,7 +1,7 @@
 package nativespider.interfaces;
 
 public interface IFileManager {
-	String[] readTextFile(String file);
+	String readTextFile(String file);
 	
 	byte[] readFile(String file);
 	
