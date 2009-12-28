@@ -8,9 +8,11 @@ import nativespider.Window;
  *
  */
 public interface IWindowAgent {
-	Window geActiveWindow();
+	Window getActiveWindow();
 	
-	Window findWindow(String name);
+	Window findWindowByID(int WndID);
+	
+	Window findWindowByTitle(String WndName);
 	
 	void activeWindow(int WID);
 

@@ -10,5 +10,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/nativespider.win32"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SWT_Linux"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SWT_Macos"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/spiderclient"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
