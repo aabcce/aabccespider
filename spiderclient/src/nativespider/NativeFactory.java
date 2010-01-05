@@ -61,7 +61,7 @@ public class NativeFactory {
 		if (_windowAgent == null) {
 			if (PlatformUtil.isWindows()) {
 
-				_windowAgent = new nativespider.win32.WindowAgent();
+				_windowAgent = new nativespider.win32.WindowAgentImpl();
 			} else if (PlatformUtil.isMac()) {
 				_windowAgent = null;
 			} else if (PlatformUtil.isLinux()) {

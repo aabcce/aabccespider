@@ -15,7 +15,7 @@ public class RobotImpl implements IRobot {
 		return new int[] {pt.x,pt.y};
 	}
 	
-	public boolean mouseMove(int posX, int posY) {
+	public boolean mouseMoveTo(int posX, int posY) {
 		MOUSEINPUT inputs = new MOUSEINPUT ();
 		
 		inputs.dwFlags = OS.MOUSEEVENTF_MOVE | OS.MOUSEEVENTF_ABSOLUTE;
@@ -42,12 +42,41 @@ public class RobotImpl implements IRobot {
 		OS.HeapFree (hHeap, 0, pInputs);
 		return result;
 	}
+	
+	public boolean mouseMove(int posX, int posY) {
+		int[] pos = getMousePostion();
+		
+		return mouseMoveTo(pos[0] + posX,pos[1] + posY);
+	}
+	
+	public boolean click()
+	{
+		boolean res = pressMouse(1);
+		res = res && releaseMouse(1);
+		return(res);
+	}
+	
+	public boolean rightClick()
+	{
+		boolean res = pressMouse(3);
+		res = res && releaseMouse(3);
+		return(res);
+	}
+	
+	public boolean middleClick()
+	{
+		boolean res = pressMouse(2);
+		res = res && releaseMouse(2);
+		return(res);
+	}
 
-	public boolean mousePress(int button) {
+	public boolean pressMouse(int button) 
+	{
 		return mouseSend(SWT.MouseDown,button);
 	}
 
-	public boolean mouseRelease(int button) {
+	public boolean releaseMouse(int button) 
+	{
 		return mouseSend(SWT.MouseUp,button);
 	}
 	
@@ -84,7 +113,7 @@ public class RobotImpl implements IRobot {
 		return result;
 	}
 
-	public boolean mouseWheel(int wheelAmt,int type) {
+	public boolean scrollMouse(int wheelAmt,int type) {
 		MOUSEINPUT inputs = new MOUSEINPUT ();
 
 		if (OS.WIN32_VERSION < OS.VERSION (5, 0)) return false;
@@ -110,12 +139,144 @@ public class RobotImpl implements IRobot {
 		OS.HeapFree (hHeap, 0, pInputs);
 		return result;
 	}
+	
+	public boolean typeKey(int keycode)
+	{
+		boolean res = pressKey(keycode);
+		res = res && releaseKey(keycode);
+		return res;
+	}
+	
+	public boolean typeText(String text)
+	{
+		boolean shift = false;
+		for(char c : text.toCharArray())
+		{
+			if(c == '~')
+			{
+				c = '`';
+				shift = true;
+			}
+			else if(c == '!')
+			{
+				c = '1';
+				shift = true;
+			}
+			else if(c == '@')
+			{
+				c = '2';
+				shift = true;
+			}
+			else if(c == '#')
+			{
+				c = '3';
+				shift = true;
+			}
+			else if(c == '$')
+			{
+				c = '4';
+				shift = true;
+			}
+			else if(c == '%')
+			{
+				c = '5';
+				shift = true;
+			}
+			else if(c == '^')
+			{
+				c = '6';
+				shift = true;
+			}
+			else if(c == '&')
+			{
+				c = '7';
+				shift = true;
+			}
+			else if(c == '*')
+			{
+				c = '8';
+				shift = true;
+			}
+			else if(c == '(')
+			{
+				c = '9';
+				shift = true;
+			}
+			else if(c == ')')
+			{
+				c = '0';
+				shift = true;
+			}
+			else if(c == '_')
+			{
+				c = '-';
+				shift = true;
+			}
+			else if(c == '+')
+			{
+				c = '=';
+				shift = true;
+			}
+			else if(c == '{')
+			{
+				c = '[';
+				shift = true;
+			}
+			else if(c == '}')
+			{
+				c = ']';
+				shift = true;
+			}
+			else if(c == '|')
+			{
+				c = '\\';
+				shift = true;
+			}
+			else if(c == '<')
+			{
+				c = ',';
+				shift = true;
+			}
+			else if(c == '>')
+			{
+				c = '.';
+				shift = true;
+			}
+			else if(c == '?')
+			{
+				c = '/';
+				shift = true;
+			}
+			else if(c == ':')
+			{
+				c = ';';
+				shift = true;
+			}
+			else if(c == '"')
+			{
+				c = '\'';
+				shift = true;
+			}
+			if(shift)
+			{
+				pressKey(SWT.SHIFT);
+			}
+			typeKey(c);
+			if(shift)
+			{
+				releaseKey(SWT.SHIFT);
+			}
+		}
+		return true;
+	}
 
-	public boolean keyPress(int keycode) {
+	public boolean pressKey(int keycode) 
+	{
 		return keySend(SWT.KeyUp,keycode);
 	}
 
-	public boolean keyRelease(int keycode) {
+	public boolean releaseKey(int keycode) 
+	{
 		return keySend(SWT.KeyDown,keycode);
 	}
 	

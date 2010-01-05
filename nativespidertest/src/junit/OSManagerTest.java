@@ -3,6 +3,7 @@ package junit;
 import junit.framework.Assert;
 import nativespider.OSInfo;
 import nativespider.interfaces.IOSManager;
+import nativespider.win32.OSManagerImpl;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
@@ -15,7 +16,7 @@ public class OSManagerTest {
 	public static IOSManager _osSManager = null;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		_osSManager = nativespider.NativeFactory.getInstance().getOSManager();
+		_osSManager = new OSManagerImpl();
 	}
 
 	@Test
