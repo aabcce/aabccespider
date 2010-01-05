@@ -12,8 +12,14 @@ public interface IWindowAgent {
 	
 	Window findWindowByID(int WndID);
 	
-	Window findWindowByTitle(String WndName);
+	Window findWindowByTitle(String WndClass, String WndName);
 	
-	void activeWindow(int WID);
+	void activeWindow(int WndID);
+	
+	void minimizeWindow(int WndID);
+	
+	void maximizeWindow(int WndID);
+	
+	void restoreWindow(int WndID);
 
 }

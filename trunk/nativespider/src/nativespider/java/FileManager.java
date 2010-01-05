@@ -7,13 +7,11 @@ public class FileManager implements IFileManager {
 
 	@Override
 	public int isDirectory(String file) {
-		// TODO Auto-generated method stub
 		return new File(file).isDirectory()?1:0;
 	}
 
 	@Override
 	public int isFile(String file) {
-		// TODO Auto-generated method stub
 		return new File(file).isFile()?1:0;
 	}
 
@@ -35,10 +33,8 @@ public class FileManager implements IFileManager {
 			stream.read(buf);
 			return buf;
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -58,13 +54,10 @@ public class FileManager implements IFileManager {
 			}
 			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		
 		return buf.toString();
 	}

@@ -3,10 +3,9 @@ package junit;
 import static org.junit.Assert.*;
 import junit.framework.Assert;
 
-import nativespider.NativeFactory;
 import nativespider.Window;
 import nativespider.interfaces.IWindowAgent;
-import nativespider.win32.WindowAgent;
+import nativespider.win32.WindowAgentImpl;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -16,7 +15,7 @@ import org.junit.Test;
 
 public class WindowAgentTest {
 	
-	private static IWindowAgent _windowAgent = NativeFactory.getInstance().getWindowAgent();
+	private static IWindowAgent _windowAgent = new WindowAgentImpl();
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -36,20 +35,28 @@ public class WindowAgentTest {
 
 	@Test
 	public void testActiveWindow() {
-		Window wnd = _windowAgent.findWindowByTitle("notpad");
+		String cls="CalcFrame";
+		String title="Calculator";
+		Window wnd = _windowAgent.findWindowByTitle(cls,title);
 		
-		(new WindowAgent()).activeWindow(wnd.WndID);
+		Assert.assertNotNull(wnd);
+		
+		_windowAgent.activeWindow(wnd.WndID);
 	}
 
 	@Test
 	public void testFindWindowByTitle() {
-		Window wnd = _windowAgent.findWindowByTitle("notpad");
+		String cls="CalcFrame";
+		String title="Calculator";
+		Window wnd = _windowAgent.findWindowByTitle(cls,title);
 		Assert.assertNotNull(wnd);
 	}
 
 	@Test
 	public void testFindWindowByID() {
-		Window wnd = _windowAgent.findWindowByID(5444);
+		String cls="CalcFrame";
+		String title="Calculator";
+		Window wnd = _windowAgent.findWindowByTitle(cls,title);
 		Assert.assertNotNull(wnd);
 	}
 
@@ -58,5 +65,40 @@ public class WindowAgentTest {
 		Window wnd = _windowAgent.getActiveWindow();
 		Assert.assertNotNull(wnd);
 	}
+	
+	@Test
+	public void testMinimizeWindow() {
+		String cls="CalcFrame";
+		String title="Calculator";
+		Window wnd = _windowAgent.findWindowByTitle(cls,title);
+		
+		Assert.assertNotNull(wnd);
+		
+		_windowAgent.minimizeWindow(wnd.WndID);
+		Assert.assertNotNull(wnd);
+	}	
 
+	@Test
+	public void testMaximizeWindow() {
+		String cls="CalcFrame";
+		String title="Calculator";
+		Window wnd = _windowAgent.findWindowByTitle(cls,title);
+
+		Assert.assertNotNull(wnd);
+		
+		_windowAgent.maximizeWindow(wnd.WndID);
+		Assert.assertNotNull(wnd);
+	}	
+
+	@Test
+	public void testRestoreWindow() {
+		String cls="CalcFrame";
+		String title="Calculator";
+		Window wnd = _windowAgent.findWindowByTitle(cls,title);
+
+		Assert.assertNotNull(wnd);
+		
+		_windowAgent.restoreWindow(wnd.WndID);
+		Assert.assertNotNull(wnd);
+	}
 }

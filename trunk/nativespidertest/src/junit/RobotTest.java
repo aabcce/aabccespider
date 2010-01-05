@@ -3,6 +3,7 @@ package junit;
 import junit.framework.Assert;
 import nativespider.*;
 import nativespider.interfaces.*;
+import nativespider.win32.RobotImpl;
 
 import static org.junit.Assert.*;
 
@@ -13,7 +14,7 @@ public class RobotTest {
 	public static IRobot _robot = null;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		_robot = nativespider.NativeFactory.getInstance().getRobot();
+		_robot = new RobotImpl();
 	}
 
 	@Test
@@ -34,34 +35,47 @@ public class RobotTest {
 
 	@Test
 	public void testMousePress() {
-		boolean res = _robot.mousePress(1);
-		_robot.mouseRelease(1);
+		boolean res = _robot.pressMouse(1);
+		_robot.releaseMouse(1);
 		Assert.assertTrue(res);
 	}
 
 	@Test
 	public void testMouseRelease() {
-		_robot.mousePress(1);
-		boolean res = _robot.mouseRelease(1);
+		_robot.pressMouse(1);
+		boolean res = _robot.releaseMouse(1);
 		Assert.assertTrue(res);
 	}
 
 	@Test
 	public void testMouseWheel() {
-		boolean res = _robot.mouseWheel(200,1);
+		boolean res = _robot.scrollMouse(200,1);
 		Assert.assertTrue(res);
 	}
 
-	@Test void testKeyPress() {
-		boolean res = _robot.keyPress(0x41);
-		_robot.keyRelease(0x41);
+	@Test
+	public void testKeyPress() {
+		boolean res = _robot.pressKey(0x41);
+		_robot.releaseKey(0x41);
 		Assert.assertTrue(res);
 	}
 
 	@Test
 	public void testKeyRelease() {
-		_robot.keyPress(0x41);
-		boolean res = _robot.keyRelease(0x41);
+		_robot.pressKey(0x41);
+		boolean res = _robot.releaseKey(0x41);
+		Assert.assertTrue(res);
+	}
+
+	@Test
+	public void testTypeText() {
+		boolean res = _robot.typeText("aabcce");
+		Assert.assertTrue(res);
+	}
+
+	@Test
+	public void testTypeText1() {
+		boolean res = _robot.typeText("aabcce@sohu.com");
 		Assert.assertTrue(res);
 	}
 
